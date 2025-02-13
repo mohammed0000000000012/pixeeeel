@@ -9,21 +9,33 @@
 <body>
     <header>
         <h1>Welcome to the Pixel Generator</h1>
-        <p>Create pixel art using a custom language!</p>
+        <p>Create pixel art with a unique language!</p>
     </header>
     
-    <section id="canvas">
-        <!-- Pixel Canvas Will Go Here -->
+    <section>
+        <label for="gridSizeSelector">Select Grid Size:</label>
+        <select id="gridSizeSelector">
+            <option value="8">8x8</option>
+            <option value="10" selected>10x10</option>
+            <option value="16">16x16</option>
+        </select>
+
+        <div id="canvas" class="canvas"></div>
     </section>
 
-    <section id="language">
-        <h2>Enter Your Pixel Language</h2>
-        <textarea id="languageInput" placeholder="e.g., Pixel 1 is red, Pixel 2 is blue"></textarea>
-        <button onclick="applyLanguage()">Generate Art</button>
+    <section>
+        <h2>Input Language</h2>
+        <textarea id="languageInput" placeholder="Write language code to color the pixels..."></textarea>
+        <button id="generateButton">Generate Art</button>
+        <button id="randomButton">Generate Random Pattern</button>
+        <button id="undoButton">Undo</button>
+        <button id="redoButton">Redo</button>
+        <button id="saveButton">Save Project</button>
+        <input type="file" id="loadButton" />
     </section>
 
-    <section id="languageOutput">
-        <h2>Generated Language Code</h2>
+    <section>
+        <h2>Generated Language</h2>
         <pre id="output"></pre>
     </section>
 
