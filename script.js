@@ -1,33 +1,57 @@
-window.onload = function () {
-    const canvas = document.getElementById('canvas');
-    const gridSize = 10; // 10x10 grid
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
 
-    // Create grid (10x10)
-    for (let i = 0; i < gridSize * gridSize; i++) {
-        const pixel = document.createElement('div');
-        pixel.style.backgroundColor = "#ccc"; // Default color (light gray)
-        canvas.appendChild(pixel);
-    }
-};
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: #4CAF50;
+    color: white;
+}
 
-// Function to apply the language input to the canvas
-function applyLanguage() {
-    const input = document.getElementById('languageInput').value;
-    const pixels = document.querySelectorAll('#canvas div');
-    
-    // Reset canvas before applying new colors
-    pixels.forEach(pixel => pixel.style.backgroundColor = "#ccc");
+header h1 {
+    margin: 0;
+}
 
-    // Split the input by commas (language format: "Pixel X is color")
-    const instructions = input.split(',');
+section {
+    margin: 20px;
+    text-align: center;
+}
 
-    instructions.forEach(instruction => {
-        // Clean up the instruction (remove extra spaces)
-        const parts = instruction.trim().split(' ');
+#canvas {
+    display: grid;
+    grid-gap: 1px;
+    margin: 20px auto;
+    background-color: #ccc;
+}
 
-        // Ensure we have the correct format: Pixel X is color
-        if (parts.length === 4 && parts[0].toLowerCase() === 'pixel' && parts[2].toLowerCase() === 'is') {
-            const pixelIndex = parseInt(parts[1]) - 1; // Convert Pixel number to index (1-based to 0-based)
-            const color = parts[3]; // Extract the color (assuming format: "Pixel X is color")
+#canvas div {
+    width: 30px;
+    height: 30px;
+    background-color: #ccc;
+    cursor: pointer;
+}
 
-            // Check if the pixel index is
+textarea {
+    width: 300px;
+    height: 150px;
+    margin: 10px 0;
+}
+
+button {
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: #ccc;
+}
+
+input[type="file"] {
+    display: none;
+}
