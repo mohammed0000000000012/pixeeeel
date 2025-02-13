@@ -7,6 +7,7 @@ window.onload = function () {
     for (let i = 0; i < gridSize * gridSize; i++) {
         const pixel = document.createElement('div');
         pixel.addEventListener('click', function () {
+            // Toggle the color of the pixel between black and gray
             pixel.style.backgroundColor = pixel.style.backgroundColor === 'black' ? '#ccc' : 'black';
             updateLanguage();
         });
