@@ -9,7 +9,7 @@
 <body>
     <header>
         <h1>Welcome to the Pixel Generator</h1>
-        <p>Create pixel art with a unique language!</p>
+        <p>Create pixel art using a custom language!</p>
     </header>
     
     <section id="canvas">
@@ -17,8 +17,14 @@
     </section>
 
     <section id="language">
-        <h2>Language Code</h2>
-        <pre id="languageOutput"></pre>
+        <h2>Enter Your Pixel Language</h2>
+        <textarea id="languageInput" placeholder="e.g., Pixel 1 is red, Pixel 2 is blue"></textarea>
+        <button onclick="applyLanguage()">Generate Art</button>
+    </section>
+
+    <section id="languageOutput">
+        <h2>Generated Language Code</h2>
+        <pre id="output"></pre>
     </section>
 
     <script src="script.js"></script>
