@@ -14,10 +14,10 @@ function createGrid(size) {
     // Create the correct number of pixel divs
     for (let i = 0; i < size * size; i++) {
         const pixel = document.createElement('div');
-        pixel.style.backgroundColor = "#ccc"; // Default color
+        pixel.style.backgroundColor = "#fff"; // Set the default color to white (change this if you prefer transparent)
         pixel.addEventListener('click', function () {
-            // Toggle between black and default color on click
-            pixel.style.backgroundColor = pixel.style.backgroundColor === 'black' ? '#ccc' : 'black';
+            // Toggle between black and white on click
+            pixel.style.backgroundColor = pixel.style.backgroundColor === 'black' ? '#fff' : 'black';
             updateLanguage();
         });
         canvas.appendChild(pixel);
