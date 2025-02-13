@@ -24,12 +24,13 @@ section {
 
 #canvas {
     display: grid;
-    grid-gap: 1px;
+    grid-gap: 0px;
     margin: 20px auto;
     background-color: #ccc;
-    /* Update: Define the number of columns */
-    grid-template-columns: repeat(auto-fill, minmax(30px, 1fr)); /* 30px width per cell, dynamic column count */
-    width: 80%; /* Optional: Control the width of the canvas */
+    /* Updated to make the grid fill the space */
+    width: 80%; 
+    height: auto;
+    grid-template-columns: repeat(10, 1fr);  /* Initial 10x10 grid */
 }
 
 #canvas div {
