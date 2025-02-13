@@ -1,49 +1,57 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    text-align: center;
-    padding: 20px;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
 }
 
 header {
-    margin-bottom: 20px;
+    text-align: center;
+    padding: 20px;
+    background-color: #4CAF50;
+    color: white;
+}
+
+header h1 {
+    margin: 0;
+}
+
+section {
+    margin: 20px;
+    text-align: center;
 }
 
 #canvas {
     display: grid;
-    grid-template-columns: repeat(10, 30px);
-    grid-gap: 2px;
-    margin-bottom: 20px;
-    justify-content: center;
+    grid-gap: 1px;
+    margin: 20px auto;
+    background-color: #ccc;
 }
 
 #canvas div {
     width: 30px;
     height: 30px;
     background-color: #ccc;
-    border: 1px solid #aaa;
     cursor: pointer;
 }
 
-#language {
-    margin-top: 20px;
-}
-
-#language textarea {
-    width: 80%;
-    height: 100px;
-    padding: 10px;
+textarea {
+    width: 300px;
+    height: 150px;
+    margin: 10px 0;
 }
 
 button {
-    padding: 10px 15px;
-    margin-top: 10px;
+    padding: 10px;
+    margin: 5px;
     cursor: pointer;
 }
 
-#languageOutput {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    margin-top: 20px;
+button:disabled {
+    background-color: #ccc;
+}
+
+input[type="file"] {
+    display: none;
 }
