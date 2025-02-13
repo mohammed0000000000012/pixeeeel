@@ -26,17 +26,17 @@ section {
     display: grid;
     grid-gap: 1px; /* Added a slight gap between pixels for visibility */
     margin: 20px auto;
-    background-color: #ccc;
+    background-color: transparent; /* Removed grey background */
     width: 80%;
     height: auto;
-    grid-template-columns: repeat(10, 1fr); /* 10x10 grid */
-    grid-template-rows: repeat(10, 1fr); /* Ensure 10 rows for the 10x10 grid */
+    grid-template-columns: repeat(10, 1fr); /* Default 10x10 grid */
+    grid-template-rows: repeat(10, 1fr);
 }
 
 #canvas div {
     width: 30px;
     height: 30px;
-    background-color: #ccc;
+    background-color: #fff; /* Changed default color to white */
     cursor: pointer;
 }
 
