@@ -6,17 +6,17 @@ function generateGrid() {
     const gridSize = parseInt(document.getElementById('gridSize').value);
     const canvas = document.getElementById('canvas');
     canvas.innerHTML = ''; // Clear previous grid
-    canvas.style.gridTemplateColumns = `repeat(${gridSize}, 16px)`; 
-    canvas.style.gridTemplateRows = `repeat(${gridSize}, 16px)`; 
+    canvas.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+    canvas.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
     canvas.style.width = `${gridSize * 16}px`;
     canvas.style.height = `${gridSize * 16}px`;
 
     for (let i = 0; i < gridSize * gridSize; i++) {
         const pixel = document.createElement('div');
         pixel.dataset.index = i;
-        pixel.style.backgroundColor = "transparent";
+        pixel.style.backgroundColor = "white"; // Default white background
         pixel.addEventListener('click', function () {
-            pixel.style.backgroundColor = pixel.style.backgroundColor === 'black' ? 'transparent' : 'black';
+            pixel.style.backgroundColor = pixel.style.backgroundColor === 'black' ? 'white' : 'black';
         });
         canvas.appendChild(pixel);
     }
