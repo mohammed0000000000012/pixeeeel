@@ -4,32 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pixel Generator</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        #canvas {
+            display: grid;
+            grid-gap: 1px;
+            margin: 20px auto;
+            background-color: transparent;
+            width: 320px;
+            height: 320px;
+        }
+        #canvas div {
+            width: 30px;
+            height: 30px;
+            background-color: transparent;
+            cursor: pointer;
+            border: 1px solid #ddd;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to the Pixel Generator</h1>
-        <p>Create pixel art with a unique language!</p>
-    </header>
-
-    <section>
-        <label for="gridSizeSelector">Select Grid Size:</label>
-        <select id="gridSizeSelector">
-            <option value="10">10x10</option>
-            <option value="16">16x16</option>
-            <option value="32">32x32</option>
-        </select>
-    </section>
-
-    <section id="canvas-container">
-        <div id="canvas"></div>
-    </section>
-
-    <section id="language">
-        <h2>Language Code</h2>
-        <pre id="languageOutput"></pre>
-    </section>
-
-    <script src="script.js"></script>
+    <h1>Pixel Generator</h1>
+    <label for="gridSize">Select Grid Size:</label>
+    <select id="gridSize">
+        <option value="10">10x10</option>
+        <option value="16">16x16</option>
+        <option value="32">32x32</option>
+    </select>
+    <button onclick="generateGrid()">Generate Grid</button>
+    
+    <div id="canvas"></div>
+    
+    <h2>Enter Color Code:</h2>
+    <textarea id="colorInput" rows="5" cols="30" placeholder="(1,1): red\n(2,3): blue\n(5,5): #ff9900"></textarea>
+    <button onclick="applyColors()">Generate Art</button>
+    
+    <script>
+        let gridSize = 10;
+        
+        function generateGrid() {
+            gridSize = parseInt(document.getElementById('gridSize').value);
+            const canvas = document.getElementById('canvas');
+            canvas.innerHTML = '';
+            canvas.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+            canvas.style.width = `${gridSize * 30}px`;
+            canvas.style.height = `${gridSize * 30}px`;
+            
+            for (let i = 0; i < gridSize * gridSize; i++) {
+                const pixel = document.createElement('div');
+                pixel.dataset.index = i;
+                canvas.appendChild(pixel);
+            }
+        }
+        
+        function applyColors() {
+            const input = document.getElementById('colorInput').value.trim().split('\n');
+            const pixels = document.querySelectorAll('#canvas div');
+            
+            input.forEach(line => {
+                const match = line.match(/\((\d+),(\d+)\):\s*(#[0-9a-fA-F]{6}|[a-zA-Z]+)/);
+                if (match) {
+                    let row = parseInt(match[1]) - 1;
+                    let col = parseInt(match[2]) - 1;
+                    let color = match[3];
+                    if (row >= 0 && row < gridSize && col >= 0 && col < gridSize) {
+                        let index = row * gridSize + col;
+                        pixels[index].style.backgroundColor = color;
+                    }
+                }
+            });
+        }
+        
+        window.onload = generateGrid;
+    </script>
 </body>
 </html>
