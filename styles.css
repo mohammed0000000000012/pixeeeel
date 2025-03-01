@@ -1,15 +1,33 @@
 #canvas {
     display: grid;
-    grid-gap: 0px; /* Remove spacing */
+    grid-gap: 0px;
     margin: 20px auto;
     background-color: transparent;
     width: fit-content;
+    max-width: 100%; /* Prevents overflow */
 }
 
 #canvas div {
-    width: 16px; /* Adjust for a perfect fit */
+    width: 16px;
     height: 16px;
     background-color: transparent;
     cursor: pointer;
-    border: none; /* Removes border effect */
+    border: none;
+}
+
+#input-section {
+    margin-top: 20px; /* Adds spacing to prevent overlap */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+textarea {
+    width: 100%;
+    max-width: 320px; /* Matches the max grid size */
+    margin-top: 10px;
+}
+
+button {
+    margin-top: 10px;
 }
