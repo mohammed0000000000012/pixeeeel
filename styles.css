@@ -1,66 +1,40 @@
-/* Basic styling for the page */
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
+let gridSize = 10;
+
+function generateGrid() {
+    gridSize = parseInt(document.getElementById('gridSize').value);
+    const canvas = document.getElementById('canvas');
+    canvas.innerHTML = ''; // Clear the canvas before generating a new one
+    canvas.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`; // Adjust grid size
+    canvas.style.width = `${gridSize * 30}px`;
+    canvas.style.height = `${gridSize * 30}px`;
+
+    // Generate individual pixels
+    for (let i = 0; i < gridSize * gridSize; i++) {
+        const pixel = document.createElement('div');
+        pixel.dataset.index = i; // Store the index in the dataset for each pixel
+        canvas.appendChild(pixel);
+    }
 }
 
-/* Styling for the title and input elements */
-h1 {
-    margin-top: 20px;
+function applyColors() {
+    const input = document.getElementById('colorInput').value.trim().split('\n');
+    const pixels = document.querySelectorAll('#canvas div');
+
+    input.forEach(line => {
+        const match = line.match(/\((\d+),(\d+)\):\s*(#[0-9a-fA-F]{6}|[a-zA-Z]+)/); // Match pattern for coordinates and color
+        if (match) {
+            let row = parseInt(match[1]) - 1; // Adjust for 0-indexed grid
+            let col = parseInt(match[2]) - 1; // Adjust for 0-indexed grid
+            let color = match[3]; // Get the color
+
+            // Check if the coordinates are within bounds
+            if (row >= 0 && row < gridSize && col >= 0 && col < gridSize) {
+                let index = row * gridSize + col;
+                pixels[index].style.backgroundColor = color; // Apply the color to the pixel
+            }
+        }
+    });
 }
 
-label {
-    font-size: 16px;
-    margin-right: 10px;
-}
-
-select {
-    padding: 5px;
-    font-size: 16px;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 10px;
-    cursor: pointer;
-}
-
-/* Canvas grid styling */
-#canvas {
-    display: grid;
-    grid-gap: 1px;
-    margin: 20px auto;
-    background-color: transparent;
-    width: 320px;
-    height: 320px;
-}
-
-/* Styling for individual pixels in the grid */
-#canvas div {
-    width: 30px;
-    height: 30px;
-    background-color: transparent;
-    cursor: pointer;
-    border: 1px solid #ccc; /* Light grey border */
-    transition: background-color 0.3s ease;
-}
-
-/* Textarea for color input */
-textarea {
-    font-family: monospace;
-    font-size: 14px;
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    width: 300px;
-    resize: none;
-}
-
-/* Optional: Additional button styling */
-button:hover {
-    background-color: #d3d3d3;
-}
+// Initialize grid when the page loads
+window.onload = generateGrid;
