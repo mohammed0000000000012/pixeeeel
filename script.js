@@ -1,14 +1,12 @@
-let gridSize = 10;
+window.onload = generateGrid;
 
 function generateGrid() {
-    gridSize = parseInt(document.getElementById('gridSize').value);
+    const gridSize = parseInt(document.getElementById('gridSize').value);
     const canvas = document.getElementById('canvas');
     canvas.innerHTML = ''; // Clear existing grid
-    canvas.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`; // Adjust number of columns
-    canvas.style.width = `${gridSize * 30}px`;
-    canvas.style.height = `${gridSize * 30}px`;
-
-    // Generate the grid cells
+    canvas.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+    canvas.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
+    
     for (let i = 0; i < gridSize * gridSize; i++) {
         const pixel = document.createElement('div');
         pixel.dataset.index = i;
@@ -21,7 +19,7 @@ function applyColors() {
     const pixels = document.querySelectorAll('#canvas div');
 
     input.forEach(line => {
-        const match = line.match(/\((\d+),(\d+)\):\s*(#[0-9a-fA-F]{6}|[a-zA-Z]+)/); // Match (x,y): color
+        const match = line.match(/\((\d+),(\d+)\):\s*(#[0-9a-fA-F]{6}|[a-zA-Z]+)/);
         if (match) {
             let row = parseInt(match[1]) - 1;
             let col = parseInt(match[2]) - 1;
@@ -34,5 +32,3 @@ function applyColors() {
         }
     });
 }
-
-window.onload = generateGrid;
