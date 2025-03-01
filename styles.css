@@ -1,11 +1,12 @@
 #canvas {
     display: grid;
-    grid-gap: 1px; /* Adjust gap between grid cells */
+    grid-template-columns: repeat(10, 30px); /* Start with 10 columns */
+    grid-gap: 1px;
     margin: 20px auto;
     background-color: transparent;
-    width: 320px;
+    width: 320px; 
     height: 320px;
-    border: 2px solid #000; /* Added canvas border for visibility */
+    border: 2px solid black;
 }
 
 #canvas div {
@@ -13,6 +14,5 @@
     height: 30px;
     background-color: transparent;
     cursor: pointer;
-    border: 1px solid #ccc; /* Ensure there's a border between cells */
-    box-sizing: border-box; /* Ensure borders are inside the cell dimensions */
+    border: 1px solid #ccc;
 }
