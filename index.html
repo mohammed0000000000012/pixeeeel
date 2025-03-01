@@ -18,7 +18,7 @@
             height: 30px;
             background-color: transparent;
             cursor: pointer;
-            border: 1px solid black; /* Updated outline to black */
+            border: 1px solid black;
         }
     </style>
 </head>
@@ -35,7 +35,7 @@
     <div id="canvas"></div>
     
     <h2>Enter Color Code:</h2>
-    <textarea id="colorInput" rows="5" cols="30" placeholder="(1,1): red\n(2,3): blue\n(5,5): #ff9900"></textarea>
+    <textarea id="colorInput" rows="5" cols="30" placeholder="(1,1): red\n(2,3): blue\n(5,5): #ff9900\n(4,4): rgb(255,0,0)\n(6,6): rgba(0,255,0,0.5)"></textarea>
     <button onclick="applyColors()">Generate Art</button>
     
     <script>
@@ -61,7 +61,7 @@
             const pixels = document.querySelectorAll('#canvas div');
             
             input.forEach(line => {
-                const match = line.match(/\((\d+),(\d+)\):\s*(#[0-9a-fA-F]{6}|[a-zA-Z]+)/);
+                const match = line.match(/\((\d+),(\d+)\):\s*(#[0-9a-fA-F]{6}|rgb\(\d+,\d+,\d+\)|rgba\(\d+,\d+,\d+,\d*\.?\d+\)|[a-zA-Z]+)/);
                 if (match) {
                     let row = parseInt(match[1]) - 1;
                     let col = parseInt(match[2]) - 1;
