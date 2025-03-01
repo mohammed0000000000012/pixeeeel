@@ -2,21 +2,16 @@ window.onload = function () {
     createGrid(10); // Default 10x10 grid on load
 };
 
-// Create grid based on selected size
 function createGrid(size) {
     const canvas = document.getElementById('canvas');
     canvas.innerHTML = ''; // Clear previous grid
+    canvas.style.gridTemplateColumns = `repeat(${size}, 30px)`; 
+    canvas.style.gridTemplateRows = `repeat(${size}, 30px)`;
 
-    // Update the grid style for correct layout
-    canvas.style.gridTemplateColumns = `repeat(${size}, 1fr)`; // Dynamically create grid columns
-    canvas.style.gridTemplateRows = `repeat(${size}, 1fr)`; // Dynamically create grid rows
-
-    // Create the correct number of pixel divs
     for (let i = 0; i < size * size; i++) {
         const pixel = document.createElement('div');
-        pixel.style.backgroundColor = "#fff"; // Set the default color to white (change this if you prefer transparent)
+        pixel.style.backgroundColor = "#fff"; // Default white
         pixel.addEventListener('click', function () {
-            // Toggle between black and white on click
             pixel.style.backgroundColor = pixel.style.backgroundColor === 'black' ? '#fff' : 'black';
             updateLanguage();
         });
@@ -24,19 +19,17 @@ function createGrid(size) {
     }
 }
 
-// Grid size selection event listener
 document.getElementById('gridSizeSelector').addEventListener('change', function () {
     const gridSize = parseInt(this.value);
     createGrid(gridSize);
 });
 
-// Update the language output based on the canvas
 function updateLanguage() {
     const pixels = document.querySelectorAll('#canvas div');
     let languageCode = '';
     pixels.forEach((pixel, index) => {
         if (pixel.style.backgroundColor === 'black') {
-            languageCode += `Pixel ${index + 1} is black, `;
+            languageCode += `Pixel ${index + 1} is black\n`;
         }
     });
     document.getElementById('languageOutput').textContent = languageCode;
