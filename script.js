@@ -1,34 +1,48 @@
-window.onload = generateGrid;
+public class Bot {
+    private String name;
+    private int health;
+    private int strength;
+    private int gatheringSpeed;
+    private int buildingSpeed;
+    private int defensePower;
 
-function generateGrid() {
-    const gridSize = parseInt(document.getElementById('gridSize').value);
-    const canvas = document.getElementById('canvas');
-    canvas.innerHTML = ''; // Clear existing grid
-    canvas.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
-    canvas.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
-    
-    for (let i = 0; i < gridSize * gridSize; i++) {
-        const pixel = document.createElement('div');
-        pixel.dataset.index = i;
-        canvas.appendChild(pixel);
+    public Bot(String name) {
+        this.name = name;
+        this.health = 100;
+        this.strength = 10;
+        this.gatheringSpeed = 5; // resources per second
+        this.buildingSpeed = 3; // buildings per second
+        this.defensePower = 8;
     }
-}
 
-function applyColors() {
-    const input = document.getElementById('colorInput').value.trim().split('\n');
-    const pixels = document.querySelectorAll('#canvas div');
+    public void gatherResources(Village village) {
+        int gathered = gatheringSpeed;
+        village.addResources(gathered);
+        System.out.println(name + " gathered " + gathered + " resources.");
+    }
 
-    input.forEach(line => {
-        const match = line.match(/\((\d+),(\d+)\):\s*(#[0-9a-fA-F]{6}|[a-zA-Z]+)/);
-        if (match) {
-            let row = parseInt(match[1]) - 1;
-            let col = parseInt(match[2]) - 1;
-            let color = match[3];
-            
-            if (row >= 0 && row < gridSize && col >= 0 && col < gridSize) {
-                let index = row * gridSize + col;
-                pixels[index].style.backgroundColor = color;
-            }
+    public void buildDefense(Village village) {
+        if (village.getResources() > 20) {
+            village.decreaseResources(20);
+            System.out.println(name + " built defenses.");
         }
-    });
+    }
+
+    public void defend(Village village) {
+        System.out.println(name + " is defending the village with strength " + defensePower);
+    }
+
+    public void performAction(Village village) {
+        Random rand = new Random();
+        int action = rand.nextInt(3);
+
+        // Decide what the bot will do based on priority
+        if (action == 0) {
+            gatherResources(village);
+        } else if (action == 1) {
+            buildDefense(village);
+        } else {
+            defend(village);
+        }
+    }
 }
